@@ -65,20 +65,3 @@ typings/
 dist
 
 event-storage.db
-package-lock.json
-.babelrc
-.gitignore
-.idea/misc.xml
-.idea/modules.xml
-.idea/reactxp-react-native-resolve.iml
-.idea/workspace.xml
-.yarnrc
-README.md
-client/components/
-client/containers/
-client/routes.js
-common/
-package.json
-resolve.config.json
-static/
-test/
