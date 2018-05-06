@@ -1,7 +1,8 @@
 {
-  "name": "todo",
+  "name": "reactxp-react-native-resolve",
   "version": "0.10.1",
   "private": true,
+  "main": "dist/main.js",
   "scripts": {
     "build": "resolve-scripts build",
     "dev": "resolve-scripts dev",
