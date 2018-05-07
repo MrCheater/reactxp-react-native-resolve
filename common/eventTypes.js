@@ -1,3 +1,0 @@
-export const ITEM_CREATED = 'ITEM_CREATED'
-export const ITEM_TOGGLED = 'ITEM_TOGGLED'
-export const ITEM_REMOVED = 'ITEM_REMOVED'

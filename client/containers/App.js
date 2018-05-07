@@ -1,140 +1,77 @@
-import React from 'react'
-import uuid from 'uuid/v4'
-import { connectViewModel } from 'resolve-redux'
+// import React from 'react'
+import { View, Text, Styles } from 'reactxp'
+
+
+import React, { Component } from 'react'
+
+import { Page } from '../components/page/Page'
+import { Todo } from '../components/Todo'
+import { TextInput } from '../components/TextInput'
+
 import { bindActionCreators } from 'redux'
-import { View, Text, TextInput, Button, Styles } from 'reactxp'
+import { connectViewModel } from 'resolve-redux'
+import actions from '../actions'
+
+const styles = {
+  view: Styles.createViewStyle({
+    flex: 1,
+    alignItems: 'center'
+  }),
+
+  title: Styles.createTextStyle({
+    fontSize: 18,
+    textAlign: 'center',
+    paddingVertical: 20
+  }),
+
+  list: Styles.createViewStyle({})
+}
 
 const viewModelName = 'Todos'
 const aggregateId = 'root-id'
 
-const styles = {
-  header: Styles.createViewStyle({
-    alignSelf: 'stretch',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ccdddd',
-    paddingHorizontal: 8,
-    paddingVertical: 16,
-    fontSize: 20
-  }),
-  listContainer: Styles.createViewStyle({
-    padding: 0,
-    flex: 1,
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    alignItems: 'stretch'
-  }),
-  container: Styles.createViewStyle({
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#eeeeee'
-  }),
-  submitButton: Styles.createViewStyle({
-    margin: 8,
-    borderRadius: 6,
-    backgroundColor: '#666666'
-  }),
-  buttonText: Styles.createTextStyle({
-    fontSize: 14,
-    marginVertical: 6,
-    marginHorizontal: 12,
-    color: '#ffffff'
-  }),
-  listScroll: Styles.createViewStyle({
-    flexDirection: 'column',
-    alignSelf: 'stretch',
-    backgroundColor: '#eeeeee'
-  }),
-  itemCell: Styles.createViewStyle({
-    flex: 1,
-    justifyContent: 'center'
-  }),
-  itemText: Styles.createTextStyle({
-    fontSize: 20,
-    marginHorizontal: 8,
-    alignSelf: 'stretch',
-    color: '#666'
-  }),
-
-  editTodoItem: Styles.createTextStyle({
-    margin: 8,
-    fontSize: 20,
-    alignSelf: 'stretch',
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 8,
-    paddingVertical: 4
-  })
-}
-
-export class App extends React.PureComponent {
-  state = {
-    text: ''
+export class App extends Component {
+  createTodo = text => {
+    this.props.createItem(aggregateId, { id: Date.now(), text })
   }
 
-  updateText = text => {
-    this.setState({
-      text
-    })
+  toggleTodo = id => {
+    this.props.toggleItem(aggregateId, { id })
   }
 
-  createItem = () => {
-    this.props.createItem(this.props.aggregateId, {
-      text: this.state.text === '' ? 'New Task' : this.state.text,
-      id: uuid()
-    })
-
-    this.setState({
-      text: ''
-    })
+  removeTodo = id => {
+    this.props.removeItem(aggregateId, { id })
   }
 
-  toggleItem = id => {
-    this.props.toggleItem(this.props.aggregateId, { id })
-  }
-
-  removeItem = id => {
-    this.props.removeItem(this.props.aggregateId, { id })
+  sortTodos = todos => {
+    const arrTodos = Object.keys(todos).map(id => ({ id, ...todos[id] }))
+    arrTodos.sort((a, b) => a.checked - b.checked)
+    return arrTodos
   }
 
   render() {
     const { todos } = this.props
-
+    console.log(todos)
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>Task's List</View>
-        <View style={styles.listContainer}>
-          <View style={styles.listScroll}>
-            {Object.keys(todos).map(id => (
-              <Text style={styles.itemCell} key={id}>
-                <Text
-                  style={{
-                    ...styles.itemText,
-                    textDecorationLine: todos[id].checked
-                      ? 'line-through'
-                      : 'none'
-                  }}
-                  onPress={this.toggleItem.bind(null, id)}
-                >
-                  {todos[id].text}
-                </Text>
-                <Text onPress={this.removeItem.bind(null, id)}>[X]</Text>
-              </Text>
+      <Page style={styles.view}>
+        <Text style={styles.title}>TODO List</Text>
+        <View style={styles.list}>
+          {todos &&
+            this.sortTodos(todos).map(todo => (
+              <Todo
+                key={todo.id}
+                todo={todo}
+                onToggle={this.toggleTodo}
+                onRemove={this.removeTodo}
+              />
             ))}
-          </View>
-        </View>
-        <View>
           <TextInput
-            style={styles.editTodoItem}
-            onChangeText={this.updateText}
-            value={this.state.text}
-            autoFocus={true}
+            key="add-todo"
+            placeholder="New TODO"
+            onSubmit={this.createTodo}
           />
-          <Button style={styles.submitButton} onPress={this.createItem}>
-            <Text style={styles.buttonText}>Add Task</Text>
-          </Button>
         </View>
-      </View>
+      </Page>
     )
   }
 }
@@ -142,10 +79,12 @@ export class App extends React.PureComponent {
 const mapStateToProps = state => ({
   viewModelName,
   aggregateId,
-  todos: state.viewModels[viewModelName][aggregateId]
+  todos: state.viewModels[viewModelName] && state.viewModels[viewModelName][aggregateId]
 })
-
-const mapDispatchToProps = (dispatch, props) =>
-  bindActionCreators(props.aggregateActions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 export default connectViewModel(mapStateToProps, mapDispatchToProps)(App)
+
+
+
+//export default () => <View style={{flex:1, backgroundColor:'green', justifyContent:'center', alignItems:'center'}}><Text>Hello</Text></View>

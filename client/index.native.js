@@ -1,16 +1,18 @@
+
 import React from 'react'
 import RX from 'reactxp'
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createMemoryHistory'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import { Routes, createStore, deserializeInitialState } from 'resolve-scripts'
+import { Routes, createStore } from 'resolve-scripts'
+
 
 const routes = require($resolve.routes)
 const rootPath = $resolve.rootPath
 
-const initialState = deserializeInitialState(window.__INITIAL_STATE__)
+const initialState = {}
 
-const origin = window.location.origin
+const origin = "http://172.22.1.107:3000"
 
 const history = createHistory({
   basename: rootPath
@@ -31,3 +33,4 @@ RX.UserInterface.setMainView(
     </ConnectedRouter>
   </Provider>
 )
+

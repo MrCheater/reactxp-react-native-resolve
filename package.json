@@ -1,28 +1,35 @@
 {
-  "name": "reactxp-react-native-resolve",
-  "version": "0.10.1",
+  "name": "expo-todo",
+  "version": "0.9.0",
   "private": true,
-  "main": "dist/main.js",
+  "main": "./dist/expo.main.js",
   "scripts": {
+    "start:native": "react-native-scripts start",
+    "dev:native": "resolve-scripts dev",
     "build": "resolve-scripts build",
     "dev": "resolve-scripts dev",
     "start": "resolve-scripts start",
     "test": "resolve-scripts test",
-    "test:functional": "resolve-scripts test:functional",
-    "prettier": "prettier --single-quote --no-semi --write  \"**/*.js\""
+    "test:functional": "resolve-scripts test:functional"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.2.0",
+    "expo": "^27.0.1",
+    "react": "16.3.1",
+    "react-dom": "16.3.1",
     "react-helmet": "^5.2.0",
+    "react-native": "~0.55.2",
     "react-redux": "^5.0.6",
-    "reactxp": "^1.1.1",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "reactxp": "0.51.0",
+    "reactxp-imagesvg": "0.2.8",
+    "reactxp-video": "0.2.3",
     "redux": "^3.7.2",
     "resolve-redux": "0.10.1",
     "resolve-scripts": "0.10.1"
   },
   "devDependencies": {
+    "babel-plugin-transform-inline-environment-variables": "^0.3.0",
+    "babel-preset-expo": "^4.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -32,8 +39,11 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "jest": "^22.4.3",
-    "prettier": "^1.12.1",
-    "react-test-renderer": "^16.2.0",
+    "jest-expo": "~27.0.0",
+    "json5": "^1.0.1",
+    "my-local-ip": "^1.0.0",
+    "react-native-scripts": "1.14.0",
+    "react-test-renderer": "16.3.1",
     "testcafe": "^0.19.1"
   }
 }
