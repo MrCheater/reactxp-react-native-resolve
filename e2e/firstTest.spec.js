@@ -20,6 +20,6 @@ describe("Root testing suite", () => {
   });
 
   it("should have todolist screen", async () => {
-    await expect(element(by.id("todolist"))).toBeVisible();
+    await expect(element(by.text("TODO List"))).toBeVisible();
   });
 });
