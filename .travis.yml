@@ -19,7 +19,7 @@ matrix:
         - sudo sysctl -w kern.maxfilesperproc=524288
       script:      
         - mkdir -p bin/Exponent.app
-        - wget -qO- https://dpq5q02fu5f55.cloudfront.net/Exponent-2.5.1.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/bin/Exponent.app
+        - wget -qO- https://dpq5q02fu5f55.cloudfront.net/Exponent-2.4.6.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/bin/Exponent.app
         - npm run dev &
         - npm run start:native &
         - npm run e2e
