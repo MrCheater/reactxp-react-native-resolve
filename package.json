@@ -10,7 +10,8 @@
     "dev": "resolve-scripts dev",
     "start": "resolve-scripts start",
     "test": "resolve-scripts test",
-    "test:functional": "resolve-scripts test:functional"
+    "test:functional": "resolve-scripts test:functional",
+    "e2e": "detox test --configuration ios.sim"
   },
   "dependencies": {
     "expo": "^27.0.1",
@@ -44,6 +45,18 @@
     "my-local-ip": "^1.0.0",
     "react-native-scripts": "1.14.0",
     "react-test-renderer": "16.3.1",
-    "testcafe": "^0.19.1"
+    "testcafe": "^0.19.1",
+    "detox": "^7.3.3",
+    "detox-expo-helpers": "^0.1.1",
+    "mocha": "^3.5.0"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim": {
+        "binaryPath": "bin/Exponent.app",
+        "type": "ios.simulator",
+        "name": "iPhone 7 Plus"
+      }
+    }
   }
 }
