@@ -55,7 +55,7 @@ export class App extends Component {
     return (
       <Page style={styles.view}>
         <Text style={styles.title}>TODO List</Text>
-        <View style={styles.list}>
+        <View testID="todolist" style={styles.list}>
           {todos &&
             this.sortTodos(todos).map(todo => (
               <Todo
