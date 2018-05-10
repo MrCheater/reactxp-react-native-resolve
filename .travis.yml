@@ -13,16 +13,13 @@ matrix:
         - brew tap wix/brew
         - brew install applesimutils
         - npm install -g detox-cli
-        - npm install -g exp
         - npm install -g react-native-cli
         - npm i
         - sudo sysctl -w kern.maxfiles=5242880
         - sudo sysctl -w kern.maxfilesperproc=524288
       script:      
-        - mkdir -p bin/Exponent.app
-        - wget -qO- https://dpq5q02fu5f55.cloudfront.net/Exponent-2.4.6.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/bin/Exponent.app
         - react-native eject
-        - detox build --configuration ios.sim.debug        
+        - detox build --configuration ios.sim.debug > /dev/null 2>&1  
         - npm run dev &
         - react-native start &
         - detox test --configuration ios.sim.debug
