@@ -20,6 +20,8 @@ matrix:
       script:      
         - mkdir -p bin/Exponent.app
         - wget -qO- https://dpq5q02fu5f55.cloudfront.net/Exponent-2.4.6.tar.gz | tar xvz -C $TRAVIS_BUILD_DIR/bin/Exponent.app
+        - react-native eject
+        - detox build --configuration ios.sim.debug        
         - npm run dev &
-        - npm run start:native &
-        - npm run e2e
+        - react-native start &
+        - detox test --configuration ios.sim.debug
