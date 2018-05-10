@@ -14,6 +14,7 @@ matrix:
         - brew install applesimutils
         - npm install -g detox-cli
         - npm install -g exp
+        - npm install -g react-native-cli
         - npm i
         - sudo sysctl -w kern.maxfiles=5242880
         - sudo sysctl -w kern.maxfilesperproc=524288
