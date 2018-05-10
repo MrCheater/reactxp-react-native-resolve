@@ -18,7 +18,8 @@
     "react": "16.3.1",
     "react-dom": "16.3.1",
     "react-helmet": "^5.2.0",
-    "react-native": "~0.55.2",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-redux": "^5.0.6",
     "react-router-redux": "^5.0.0-alpha.9",
     "reactxp": "0.51.0",
@@ -54,6 +55,21 @@
     "configurations": {
       "ios.sim": {
         "binaryPath": "bin/Exponent.app",
+        "type": "ios.simulator",
+        "name": "iPhone 7 Plus"
+      }
+    }
+  },
+  "detox": {
+    "test-runner": "mocha",
+    "specs": "e2e",
+    "runner-config": "e2e/mocha.opts",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath":
+          "ios/build/Build/Products/Debug-iphonesimulator/expoToDo.app",
+        "build":
+          "xcodebuild -project ios/expoToDo.xcodeproj -scheme expoToDo -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "name": "iPhone 7 Plus"
       }

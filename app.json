@@ -1,4 +1,6 @@
 {
+  "name": "expoToDo",
+  "displayName": "expoToDo",
   "expo": {
     "sdkVersion": "27.0.0",
     "appKey": "RXApp",
