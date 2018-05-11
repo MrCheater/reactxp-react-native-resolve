@@ -21,5 +21,6 @@ matrix:
         - react-native eject
         - detox build --configuration ios.sim.debug > /dev/null 2>&1  
         - npm run dev &
-        - react-native start &
+        - sleep 10
+        - react-native start &      
         - detox test --configuration ios.sim.debug
