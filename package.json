@@ -5,20 +5,19 @@
   "main": "./dist/expo.main.js",
   "scripts": {
     "start:native": "react-native-scripts start",
-    "dev:native": "resolve-scripts dev",
     "build": "resolve-scripts build",
     "dev": "resolve-scripts dev",
     "start": "resolve-scripts start",
     "test": "resolve-scripts test",
-    "test:functional": "resolve-scripts test:functional",
-    "e2e": "detox test --configuration ios.sim.debug"
+    "test:functional": "resolve-scripts test:functional"
   },
   "dependencies": {
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-dom": "16.3.1",
     "react-helmet": "^5.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-redux": "^5.0.6",
     "react-router-redux": "^5.0.0-alpha.9",
     "reactxp": "0.51.0",
@@ -47,7 +46,6 @@
     "react-test-renderer": "16.3.1",
     "testcafe": "^0.19.1",
     "detox": "^7.3.3",
-    "detox-expo-helpers": "^0.1.1",
     "mocha": "^3.5.0"
   },
   "detox": {
@@ -56,8 +54,10 @@
     "runner-config": "e2e/mocha.opts",
     "configurations": {
       "ios.sim.debug": {
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/expoToDo.app",
-        "build": "xcodebuild -project ios/expoToDo.xcodeproj -scheme expoToDo -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "binaryPath":
+          "ios/build/Build/Products/Debug-iphonesimulator/expoToDo.app",
+        "build":
+          "xcodebuild -project ios/expoToDo.xcodeproj -scheme expoToDo -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "name": "iPhone 7 Plus"
       }

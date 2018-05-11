@@ -1,5 +1,3 @@
-const { blacklistLiveReloadUrl, getAppUrl } = require("detox-expo-helpers");
-
 describe("Root testing suite", () => {
   beforeEach(async () => {
     await device.reloadReactNative();
