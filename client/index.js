@@ -1,16 +1,17 @@
 import React from 'react'
 import RX from 'reactxp'
-import createHistory from 'history/createBrowserHistory'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import { Routes, createStore, deserializeInitialState } from 'resolve-scripts'
+import { Routes, createStore } from 'resolve-scripts'
 
-const routes = require($resolve.routes)
+import routes from '$resolve.routes'
+import createHistory from '$resolve.crossplatform.history'
+
 const rootPath = $resolve.rootPath
 
-const initialState = deserializeInitialState(window.__INITIAL_STATE__)
+const origin = $resolve.crossplatform.origin
 
-const origin = window.location.origin
+const initialState = {}
 
 const history = createHistory({
   basename: rootPath
@@ -31,3 +32,4 @@ RX.UserInterface.setMainView(
     </ConnectedRouter>
   </Provider>
 )
+

@@ -4,6 +4,6 @@
   "expo": {
     "sdkVersion": "27.0.0",
     "appKey": "RXApp",
-    "entryPoint": "./dist/expo.main.js"
+    "entryPoint": "./dist/expo/main.js"
   }
 }

@@ -51,7 +51,7 @@ export class App extends Component {
 
   render() {
     const { todos } = this.props
-    console.log(todos)
+
     return (
       <Page style={styles.view}>
         <Text style={styles.title}>TODO List</Text>

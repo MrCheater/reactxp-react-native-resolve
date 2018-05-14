@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import webpack from "webpack";
 import nodeExternals from "webpack-node-externals";
 
 import getModulesDirs from "resolve-scripts/dist/core/get_modules_dirs";
@@ -11,137 +12,96 @@ const host = process.argv[3] || require("my-local-ip")();
 try {
   fs.mkdirSync("dist");
 } catch (e) {}
-const pathToMain = path.resolve(__dirname, "client/index.native.js");
-
-export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
-  fs.writeFileSync(
-    pathToMain,
-    `
-import React from 'react'
-import RX from 'reactxp'
-import createHistory from 'history/createMemoryHistory'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
-import { Routes, createStore } from 'resolve-scripts'
 
 
-const routes = require($resolve.routes)
-const rootPath = $resolve.rootPath
+try {
+  fs.mkdirSync("dist/expo");
+} catch (e) {}
 
-const initialState = {}
+fs.writeFileSync(
+  path.resolve(__dirname, "dist/expo/main.js"),
+  `
+import main from './main'
 
-const origin = "http://${host}:${resolveConfig.port}"
-
-const history = createHistory({
-  basename: rootPath
-})
-
-const store = createStore({
-  initialState,
-  history,
-  origin,
-  rootPath
-})
-
-const App = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Routes routes={routes} />
-    </ConnectedRouter>
-  </Provider>
+export default main
+  `
 );
 
-RX.App.initialize(true, true);
-export default App;
-RX.UserInterface.registerRootView("expoToDo", () => App);
-`
+export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
+  const [webpackClientConfig] = webpackConfigs
+
+  if(!webpackClientConfig.resolve.alias) {
+    webpackClientConfig.resolve.alias = {}
+  }
+
+  Object.assign(
+    webpackClientConfig.resolve.alias,
+    {
+      '$resolve.routes': resolveConfig.routes,
+      '$resolve.crossplatform.history': 'history/createBrowserHistory',
+    }
+  )
+
+  webpackClientConfig.plugins.push(
+    new webpack.DefinePlugin({
+      "$resolve.crossplatform.origin":
+        "window.location.origin",
+    })
   );
 
-  webpackConfigs.push({
-    name: "Server",
-    entry: [
-      "babel-regenerator-runtime",
-      path.resolve(__dirname, "client/index.native.js")
-    ],
-    mode: deployOptions.mode,
-    devtool: "source-map",
-    target: "node",
-    node: {
-      __dirname: true,
-      __filename: true
-    },
-    resolve: {
-      modules: getModulesDirs()
-    },
-    output: {
-      path: path.resolve(__dirname, "dist"),
-      filename: "expo.main.js",
-      devtoolModuleFilenameTemplate: "[absolute-resource-path]",
-      devtoolFallbackModuleFilenameTemplate: "[absolute-resource-path]?[hash]"
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          loaders: [
-            {
-              loader: "babel-loader?cacheDirectory=true"
-            }
-          ],
-          exclude: [...getModulesDirs(), path.resolve(__dirname, "dist")]
-        }
-      ]
-    },
-    plugins: [
-      getWebpackEnvPlugin({ resolveConfig, deployOptions, env }),
-      getWebpackResolveAliasPlugin({ resolveConfig, deployOptions, env })
-    ],
-    externals: getModulesDirs().map(modulesDir =>
-      nodeExternals({ modulesDir, whitelist: "resolve-scripts" })
-    )
-  });
-
-  //   fs.writeFileSync(
-  //       pathToMain,
-  //       `
-  // import React from 'react'
-  // import RX from 'reactxp'
-  // import createHistory from 'history/createMemoryHistory'
-  // import { Provider } from 'react-redux'
-  // import { ConnectedRouter } from 'react-router-redux'
-  //
-  //
-  // $resolve = ${JSON.stringify(resolveConfig, null, 2)}
-  //
-  // const { Routes, createStore } = require('resolve-scripts')
-  //
-  //
-  // const routes = require("${resolveConfig.routes}")
-  // const rootPath = "${resolveConfig.rootPath}"
-  //
-  // const initialState = {}
-  //
-  // const origin = "${host}:${resolveConfig.port}"
-  //
-  // const history = createHistory({
-  //     basename: rootPath
-  // })
-  //
-  // const store = createStore({
-  //   initialState,
-  //   history,
-  //   origin,
-  //   rootPath
-  // })
-  //
-  // RX.App.initialize(true, true)
-  // RX.UserInterface.setMainView(
-  //   <Provider store={store}>
-  //     <ConnectedRouter history={history}>
-  //         <Routes routes={routes} />
-  //     </ConnectedRouter>
-  //   </Provider>
-  // )
-  //         `.trim()
-  //     )
+  for(const target of ['ios', 'android']) {
+    webpackConfigs.push({
+      name: target,
+      entry: [
+        "babel-regenerator-runtime",
+        path.resolve(__dirname, "client/index.js")
+      ],
+      mode: deployOptions.mode,
+      devtool: "source-map",
+      target: "node",
+      node: {
+        __dirname: true,
+        __filename: true
+      },
+      resolve: {
+        modules: getModulesDirs(),
+        alias: {
+          '$resolve.routes': resolveConfig.routes,
+          '$resolve.crossplatform.history': 'history/createMemoryHistory',
+        },
+        extensions: [`.${target}.js`, ".native.js", ".js"]
+      },
+      output: {
+        path: path.resolve(__dirname, "dist/expo"),
+        filename: `main.${target}.js`,
+        devtoolModuleFilenameTemplate: "[absolute-resource-path]",
+        devtoolFallbackModuleFilenameTemplate: "[absolute-resource-path]?[hash]"
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            loaders: [
+              {
+                loader: "babel-loader?cacheDirectory=true"
+              }
+            ],
+            exclude: [...getModulesDirs(), path.resolve(__dirname, "dist")]
+          }
+        ]
+      },
+      plugins: [
+        getWebpackEnvPlugin({ resolveConfig, deployOptions, env }),
+        getWebpackResolveAliasPlugin({ resolveConfig, deployOptions, env }),
+        new webpack.DefinePlugin({
+          "$resolve.crossplatform.origin": JSON.stringify(
+            `http://${host}:${resolveConfig.port}`
+          ),
+        })
+      ],
+      externals: getModulesDirs().map(modulesDir =>
+        nodeExternals({ modulesDir, whitelist: "resolve-scripts" })
+      )
+    });
+  }
 };
