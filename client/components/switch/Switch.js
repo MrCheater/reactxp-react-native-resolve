@@ -27,7 +27,7 @@ export class Switch extends Component {
   render() {
     const { value } = this.props
     return (
-      <View style={styles.box} onPress={this.onToggle}>
+      <View accessibilityLabel='switch' style={styles.box} onPress={this.onToggle}>
         {value && (
           <Text style={styles.mark}>{String.fromCharCode(0x2713)}</Text>
         )}

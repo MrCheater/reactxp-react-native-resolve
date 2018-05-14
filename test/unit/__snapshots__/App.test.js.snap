@@ -1,143 +1,601 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
-  <div>
-    <nav
-      className="navbar navbar-default"
+<div
+  aria-hidden={undefined}
+  aria-label={undefined}
+  aria-labelledby={undefined}
+  aria-live={undefined}
+  aria-roledescription={undefined}
+  aria-selected={undefined}
+  id={undefined}
+  onBlur={undefined}
+  onClick={undefined}
+  onContextMenu={undefined}
+  onDragEnter={undefined}
+  onDragLeave={undefined}
+  onDragOver={undefined}
+  onDrop={undefined}
+  onFocus={undefined}
+  onKeyDown={undefined}
+  onMouseEnter={undefined}
+  onMouseLeave={undefined}
+  onMouseMove={undefined}
+  onMouseOver={undefined}
+  role={undefined}
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "overflow": "hidden",
+      "position": "relative",
+    }
+  }
+  tabIndex={undefined}
+  title={undefined}
+>
+  <div
+    aria-hidden={undefined}
+    data-text-as-pseudo-element="TODO List"
+    id={undefined}
+    onClick={undefined}
+    onContextMenu={undefined}
+    style={
+      Object {
+        "cursor": "inherit",
+        "display": "inline",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "fontSize": 18,
+        "msHyphens": "auto",
+        "overflow": "hidden",
+        "overflowWrap": "break-word",
+        "paddingBottom": 20,
+        "paddingTop": 20,
+        "position": "relative",
+        "textAlign": "center",
+        "whiteSpace": "pre-wrap",
+      }
+    }
+  />
+  <div
+    aria-hidden={undefined}
+    aria-label={undefined}
+    aria-labelledby={undefined}
+    aria-live={undefined}
+    aria-roledescription={undefined}
+    aria-selected={undefined}
+    id={undefined}
+    onBlur={undefined}
+    onClick={undefined}
+    onContextMenu={undefined}
+    onDragEnter={undefined}
+    onDragLeave={undefined}
+    onDragOver={undefined}
+    onDrop={undefined}
+    onFocus={undefined}
+    onKeyDown={undefined}
+    onMouseEnter={undefined}
+    onMouseLeave={undefined}
+    onMouseMove={undefined}
+    onMouseOver={undefined}
+    role={undefined}
+    style={
+      Object {
+        "alignItems": "stretch",
+        "display": "flex",
+        "flexDirection": "column",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "overflow": "hidden",
+        "position": "relative",
+      }
+    }
+    tabIndex={undefined}
+    title={undefined}
+  >
+    <div
+      aria-hidden={undefined}
+      aria-label={undefined}
+      aria-labelledby={undefined}
+      aria-live={undefined}
+      aria-roledescription={undefined}
+      aria-selected={undefined}
+      id={undefined}
+      onBlur={undefined}
+      onClick={undefined}
+      onContextMenu={undefined}
+      onDragEnter={undefined}
+      onDragLeave={undefined}
+      onDragOver={undefined}
+      onDrop={undefined}
+      onFocus={undefined}
+      onKeyDown={undefined}
+      onMouseEnter={undefined}
+      onMouseLeave={undefined}
+      onMouseMove={undefined}
+      onMouseOver={undefined}
+      role={undefined}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "justifyContent": "space-between",
+          "overflow": "hidden",
+          "paddingBottom": 10,
+          "paddingLeft": 20,
+          "paddingRight": 20,
+          "paddingTop": 10,
+          "position": "relative",
+          "webkitFlexDirection": "row",
+        }
+      }
+      tabIndex={undefined}
+      title={undefined}
     >
       <div
-        className="container"
-      >
-        <p
-          className="navbar-text"
-        >
-          <img
-            className=""
-            src="/resolve-logo.png"
-          />
-           Todo Example
-        </p>
-        <div
-          aria-expanded={null}
-          className="navbar-collapse collapse"
-        >
-          <p
-            className="navbar-text navbar-right"
-          >
-            <a
-              className="navbar-link"
-              href="https://facebook.com/resolvejs/"
-            >
-              <img
-                className=""
-                src="/fb-logo.png"
-              />
-            </a>
-          </p>
-          <p
-            className="navbar-text navbar-right"
-          >
-            <a
-              className="navbar-link"
-              href="https://twitter.com/resolvejs"
-            >
-              <img
-                className=""
-                src="/twitter-logo.png"
-              />
-            </a>
-          </p>
-          <p
-            className="navbar-text navbar-right"
-          >
-            <a
-              className="navbar-link"
-              href="https://github.com/reimagined/resolve"
-            >
-              <img
-                className=""
-                src="/github-logo.png"
-              />
-            </a>
-          </p>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <div
-    className="example-wrapper"
-  >
-    <h1>
-      Task's List
-    </h1>
-    <ul
-      className="example-list list-group"
-    >
-      <li
-        className="list-group-item"
-      >
-        <label
-          className="checkbox-inline"
-          style={undefined}
-          title=""
-        >
-          <input
-            checked={true}
-            disabled={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-          text1
-        </label>
-        <img
-          className="example-close-button"
-          onClick={[Function]}
-          src="/close-button.png"
-        />
-      </li>
-      <li
-        className="list-group-item"
-      >
-        <label
-          className="checkbox-inline"
-          style={undefined}
-          title=""
-        >
-          <input
-            checked={false}
-            disabled={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-          text2
-        </label>
-        <img
-          className="example-close-button"
-          onClick={[Function]}
-          src="/close-button.png"
-        />
-      </li>
-    </ul>
-    <form
-      className="example-form form-inline"
-    >
-      <input
-        className="example-form-control form-control"
+        aria-hidden={undefined}
+        aria-label={undefined}
+        aria-labelledby={undefined}
+        aria-live={undefined}
+        aria-roledescription={undefined}
+        aria-selected={undefined}
         id={undefined}
-        onKeyPress={[Function]}
-        placeholder="New Task"
-        type="text"
-      />
-      <button
-        className="example-button btn btn-success"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
+        onBlur={undefined}
+        onClick={undefined}
+        onContextMenu={undefined}
+        onDragEnter={undefined}
+        onDragLeave={undefined}
+        onDragOver={undefined}
+        onDrop={undefined}
+        onFocus={undefined}
+        onKeyDown={undefined}
+        onMouseEnter={undefined}
+        onMouseLeave={undefined}
+        onMouseMove={undefined}
+        onMouseOver={undefined}
+        role={undefined}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flexDirection": "row",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "overflow": "hidden",
+            "position": "relative",
+            "webkitFlexDirection": "row",
+          }
+        }
+        tabIndex={undefined}
+        title={undefined}
       >
-        Add Task
+        <div
+          aria-hidden={undefined}
+          aria-label={undefined}
+          aria-labelledby={undefined}
+          aria-live={undefined}
+          aria-roledescription={undefined}
+          aria-selected={undefined}
+          id={undefined}
+          onBlur={undefined}
+          onClick={[Function]}
+          onContextMenu={undefined}
+          onDragEnter={undefined}
+          onDragLeave={undefined}
+          onDragOver={undefined}
+          onDrop={undefined}
+          onFocus={undefined}
+          onKeyDown={undefined}
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          onMouseMove={undefined}
+          onMouseOver={undefined}
+          role={undefined}
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#828282",
+              "borderRadius": 2,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "display": "flex",
+              "flexDirection": "column",
+              "flexGrow": 0,
+              "flexShrink": 0,
+              "height": 30,
+              "justifyContent": "center",
+              "overflow": "hidden",
+              "position": "relative",
+              "width": 30,
+            }
+          }
+          tabIndex={undefined}
+          title={undefined}
+        />
+        <div
+          aria-hidden={undefined}
+          data-text-as-pseudo-element="text2"
+          id={undefined}
+          onClick={undefined}
+          onContextMenu={undefined}
+          style={
+            Object {
+              "cursor": "inherit",
+              "display": "inline",
+              "flexGrow": 0,
+              "flexShrink": 0,
+              "fontSize": 16,
+              "marginLeft": 10,
+              "marginRight": 20,
+              "msHyphens": "auto",
+              "overflow": "hidden",
+              "overflowWrap": "break-word",
+              "position": "relative",
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        />
+      </div>
+      <button
+        aria-checked={undefined}
+        aria-controls={undefined}
+        aria-disabled={undefined}
+        aria-haspopup={undefined}
+        aria-hidden={undefined}
+        aria-label={undefined}
+        aria-selected={undefined}
+        disabled={undefined}
+        id={undefined}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onFocus={[Function]}
+        onKeyDown={undefined}
+        onMouseDown={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "alignItems": "center",
+            "appRegion": "no-drag",
+            "backgroundColor": "#c4c4c4",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": "0",
+            "cursor": "pointer",
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "height": 30,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "padding": "0",
+            "position": "relative",
+            "textAlign": "left",
+            "width": 30,
+          }
+        }
+        tabIndex={undefined}
+        title={undefined}
+      >
+        <div
+          aria-hidden={undefined}
+          data-text-as-pseudo-element="×"
+          id={undefined}
+          onClick={undefined}
+          onContextMenu={undefined}
+          style={
+            Object {
+              "cursor": "inherit",
+              "display": "inline",
+              "flexGrow": 0,
+              "flexShrink": 0,
+              "fontSize": 18,
+              "msHyphens": "auto",
+              "overflow": "hidden",
+              "overflowWrap": "break-word",
+              "position": "relative",
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        />
       </button>
-    </form>
+    </div>
+    <div
+      aria-hidden={undefined}
+      aria-label={undefined}
+      aria-labelledby={undefined}
+      aria-live={undefined}
+      aria-roledescription={undefined}
+      aria-selected={undefined}
+      id={undefined}
+      onBlur={undefined}
+      onClick={undefined}
+      onContextMenu={undefined}
+      onDragEnter={undefined}
+      onDragLeave={undefined}
+      onDragOver={undefined}
+      onDrop={undefined}
+      onFocus={undefined}
+      onKeyDown={undefined}
+      onMouseEnter={undefined}
+      onMouseLeave={undefined}
+      onMouseMove={undefined}
+      onMouseOver={undefined}
+      role={undefined}
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "justifyContent": "space-between",
+          "overflow": "hidden",
+          "paddingBottom": 10,
+          "paddingLeft": 20,
+          "paddingRight": 20,
+          "paddingTop": 10,
+          "position": "relative",
+          "webkitFlexDirection": "row",
+        }
+      }
+      tabIndex={undefined}
+      title={undefined}
+    >
+      <div
+        aria-hidden={undefined}
+        aria-label={undefined}
+        aria-labelledby={undefined}
+        aria-live={undefined}
+        aria-roledescription={undefined}
+        aria-selected={undefined}
+        id={undefined}
+        onBlur={undefined}
+        onClick={undefined}
+        onContextMenu={undefined}
+        onDragEnter={undefined}
+        onDragLeave={undefined}
+        onDragOver={undefined}
+        onDrop={undefined}
+        onFocus={undefined}
+        onKeyDown={undefined}
+        onMouseEnter={undefined}
+        onMouseLeave={undefined}
+        onMouseMove={undefined}
+        onMouseOver={undefined}
+        role={undefined}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flexDirection": "row",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "overflow": "hidden",
+            "position": "relative",
+            "webkitFlexDirection": "row",
+          }
+        }
+        tabIndex={undefined}
+        title={undefined}
+      >
+        <div
+          aria-hidden={undefined}
+          aria-label={undefined}
+          aria-labelledby={undefined}
+          aria-live={undefined}
+          aria-roledescription={undefined}
+          aria-selected={undefined}
+          id={undefined}
+          onBlur={undefined}
+          onClick={[Function]}
+          onContextMenu={undefined}
+          onDragEnter={undefined}
+          onDragLeave={undefined}
+          onDragOver={undefined}
+          onDrop={undefined}
+          onFocus={undefined}
+          onKeyDown={undefined}
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          onMouseMove={undefined}
+          onMouseOver={undefined}
+          role={undefined}
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#828282",
+              "borderRadius": 2,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "display": "flex",
+              "flexDirection": "column",
+              "flexGrow": 0,
+              "flexShrink": 0,
+              "height": 30,
+              "justifyContent": "center",
+              "overflow": "hidden",
+              "position": "relative",
+              "width": 30,
+            }
+          }
+          tabIndex={undefined}
+          title={undefined}
+        >
+          <div
+            aria-hidden={undefined}
+            data-text-as-pseudo-element="✓"
+            id={undefined}
+            onClick={undefined}
+            onContextMenu={undefined}
+            style={
+              Object {
+                "color": "#828282",
+                "cursor": "inherit",
+                "display": "inline",
+                "flexGrow": 0,
+                "flexShrink": 0,
+                "fontSize": 16,
+                "msHyphens": "auto",
+                "overflow": "hidden",
+                "overflowWrap": "break-word",
+                "position": "relative",
+                "whiteSpace": "pre-wrap",
+              }
+            }
+          />
+        </div>
+        <div
+          aria-hidden={undefined}
+          data-text-as-pseudo-element="text1"
+          id={undefined}
+          onClick={undefined}
+          onContextMenu={undefined}
+          style={
+            Object {
+              "color": "#828282",
+              "cursor": "inherit",
+              "display": "inline",
+              "flexGrow": 0,
+              "flexShrink": 0,
+              "fontSize": 16,
+              "marginLeft": 10,
+              "marginRight": 20,
+              "msHyphens": "auto",
+              "overflow": "hidden",
+              "overflowWrap": "break-word",
+              "position": "relative",
+              "textDecoration": "line-through",
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        />
+      </div>
+      <button
+        aria-checked={undefined}
+        aria-controls={undefined}
+        aria-disabled={undefined}
+        aria-haspopup={undefined}
+        aria-hidden={undefined}
+        aria-label={undefined}
+        aria-selected={undefined}
+        disabled={undefined}
+        id={undefined}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onFocus={[Function]}
+        onKeyDown={undefined}
+        onMouseDown={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "alignItems": "center",
+            "appRegion": "no-drag",
+            "backgroundColor": "#c4c4c4",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": "0",
+            "cursor": "pointer",
+            "display": "flex",
+            "flexDirection": "column",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "height": 30,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "padding": "0",
+            "position": "relative",
+            "textAlign": "left",
+            "width": 30,
+          }
+        }
+        tabIndex={undefined}
+        title={undefined}
+      >
+        <div
+          aria-hidden={undefined}
+          data-text-as-pseudo-element="×"
+          id={undefined}
+          onClick={undefined}
+          onContextMenu={undefined}
+          style={
+            Object {
+              "cursor": "inherit",
+              "display": "inline",
+              "flexGrow": 0,
+              "flexShrink": 0,
+              "fontSize": 18,
+              "msHyphens": "auto",
+              "overflow": "hidden",
+              "overflowWrap": "break-word",
+              "position": "relative",
+              "whiteSpace": "pre-wrap",
+            }
+          }
+        />
+      </button>
+    </div>
+    <input
+      aria-label={undefined}
+      aria-live={undefined}
+      autoCorrect={undefined}
+      disabled={false}
+      maxLength={undefined}
+      onBlur={[Function]}
+      onFocus={undefined}
+      onInput={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      onPaste={[Function]}
+      placeholder="New TODO"
+      spellCheck={undefined}
+      style={
+        Object {
+          "alignItems": "stretch",
+          "borderColor": "#333333",
+          "borderRadius": 4,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "display": "flex",
+          "flexBasis": "auto",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "marginBottom": 10,
+          "marginTop": 10,
+          "outline": "none",
+          "overflowX": "hidden",
+          "overflowY": "auto",
+          "paddingBottom": 10,
+          "paddingLeft": 20,
+          "paddingRight": 20,
+          "paddingTop": 10,
+          "position": "relative",
+          "resize": "none",
+        }
+      }
+      type="text"
+      value=""
+    />
   </div>
 </div>
 `;

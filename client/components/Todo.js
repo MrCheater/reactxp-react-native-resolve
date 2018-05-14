@@ -63,7 +63,7 @@ export class Todo extends Component {
       todo: { text, checked }
     } = this.props
     return (
-      <View style={styles.todo}>
+      <View accessibilityLabel="todo"  style={styles.todo}>
         <View style={styles.item}>
           <Switch value={checked} onValueChange={this.onToggle} />
           <Text style={[styles.text, checked && styles.checked]}>{text}</Text>
