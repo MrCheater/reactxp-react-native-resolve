@@ -3,6 +3,7 @@ import RX from 'reactxp'
 import { AppContainer, createStore } from 'resolve-redux'
 
 import createHistory from './crossplatform/history'
+import origin from './crossplatform/origin'
 
 import routes from '$resolve.routes'
 import rootPath from '$resolve.rootPath'
@@ -13,8 +14,6 @@ import readModels from '$resolve.readModels'
 import aggregates from '$resolve.aggregates'
 import subscribeAdapter from '$resolve.subscribeAdapter'
 import redux from '$resolve.redux'
-
-const origin = $crossplatform.origin
 
 const initialState = {}
 

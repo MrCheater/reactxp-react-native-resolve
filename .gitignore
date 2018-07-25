@@ -73,3 +73,5 @@ package-lock.json
 
 android
 ios
+client/crossplatform/origin.android.js
+client/crossplatform/origin.ios.js
