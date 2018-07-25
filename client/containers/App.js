@@ -1,6 +1,4 @@
-// import React from 'react'
 import { View, Text, Styles } from 'reactxp'
-
 
 import React, { Component } from 'react'
 
@@ -9,8 +7,9 @@ import { Todo } from '../components/Todo'
 import { TextInput } from '../components/TextInput'
 
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { connectViewModel } from 'resolve-redux'
-import actions from '../actions'
+
 
 const styles = {
   view: Styles.createViewStyle({
@@ -51,11 +50,11 @@ export class App extends Component {
 
   render() {
     const { todos } = this.props
-    console.log(todos)
+
     return (
       <Page style={styles.view}>
         <Text style={styles.title}>TODO List</Text>
-        <View style={styles.list}>
+        <View accessibilityLabel="todos" style={styles.list}>
           {todos &&
             this.sortTodos(todos).map(todo => (
               <Todo
@@ -76,15 +75,17 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToOptions = () => ({
   viewModelName,
-  aggregateId,
-  todos: state.viewModels[viewModelName] && state.viewModels[viewModelName][aggregateId]
+  aggregateIds: [aggregateId]
 })
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
-export default connectViewModel(mapStateToProps, mapDispatchToProps)(App)
+const mapStateToProps = (state, { data }) => ({
+  todos: data
+})
 
+const mapDispatchToProps = (dispatch, { aggregateActions }) => bindActionCreators(aggregateActions, dispatch)
 
-
-//export default () => <View style={{flex:1, backgroundColor:'green', justifyContent:'center', alignItems:'center'}}><Text>Hello</Text></View>
+export default connectViewModel(mapStateToOptions)(
+  connect(mapStateToProps, mapDispatchToProps)(App)
+)

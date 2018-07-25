@@ -1,147 +1,144 @@
 import fs from "fs";
 import path from "path";
+import webpack from "webpack";
+/*
 import nodeExternals from "webpack-node-externals";
 
 import getModulesDirs from "resolve-scripts/dist/core/get_modules_dirs";
 import getWebpackEnvPlugin from "resolve-scripts/dist/core/get_webpack_env_plugin";
-import getWebpackResolveAliasPlugin from "resolve-scripts/dist/core/get_webpack_resolve_alias_plugin";
+import getWebpackAlias from "resolve-scripts/dist/core/get_webpack_alias";
 
 const host = process.argv[3] || require("my-local-ip")();
+*/
 
 try {
   fs.mkdirSync("dist");
 } catch (e) {}
-const pathToMain = path.resolve(__dirname, "client/index.native.js");
-
-export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
-  fs.writeFileSync(
-    pathToMain,
-    `
-import React from 'react'
-import RX from 'reactxp'
-import createHistory from 'history/createMemoryHistory'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
-import { Routes, createStore } from 'resolve-scripts'
 
 
-const routes = require($resolve.routes)
-const rootPath = $resolve.rootPath
+try {
+  fs.mkdirSync("dist/expo");
+} catch (e) {}
 
-const initialState = {}
+fs.writeFileSync(
+  path.resolve(__dirname, "dist/expo/main.js"),
+  `
+import main from './main'
 
-const origin = "http://${host}:${resolveConfig.port}"
-
-const history = createHistory({
-  basename: rootPath
-})
-
-const store = createStore({
-  initialState,
-  history,
-  origin,
-  rootPath
-})
-
-const App = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Routes routes={routes} />
-    </ConnectedRouter>
-  </Provider>
+export default main
+  `
 );
 
-RX.App.initialize(true, true);
-export default App;
-RX.UserInterface.registerRootView("expoToDo", () => App);
-`
+export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
+  const [webpackClientConfig] = webpackConfigs
+
+
+
+  webpackClientConfig.plugins.push(
+    new webpack.DefinePlugin({
+      "$crossplatform.origin":
+        "window.location.origin",
+    })
   );
 
-  webpackConfigs.push({
-    name: "Server",
-    entry: [
-      "babel-regenerator-runtime",
-      path.resolve(__dirname, "client/index.native.js")
-    ],
-    mode: deployOptions.mode,
-    devtool: "source-map",
-    target: "node",
-    node: {
-      __dirname: true,
-      __filename: true
-    },
-    resolve: {
-      modules: getModulesDirs()
-    },
-    output: {
-      path: path.resolve(__dirname, "dist"),
-      filename: "expo.main.js",
-      devtoolModuleFilenameTemplate: "[absolute-resource-path]",
-      devtoolFallbackModuleFilenameTemplate: "[absolute-resource-path]?[hash]"
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          loaders: [
-            {
-              loader: "babel-loader?cacheDirectory=true"
-            }
-          ],
-          exclude: [...getModulesDirs(), path.resolve(__dirname, "dist")]
-        }
-      ]
-    },
-    plugins: [
-      getWebpackEnvPlugin({ resolveConfig, deployOptions, env }),
-      getWebpackResolveAliasPlugin({ resolveConfig, deployOptions, env })
-    ],
-    externals: getModulesDirs().map(modulesDir =>
-      nodeExternals({ modulesDir, whitelist: "resolve-scripts" })
-    )
-  });
-
-  //   fs.writeFileSync(
-  //       pathToMain,
-  //       `
-  // import React from 'react'
-  // import RX from 'reactxp'
-  // import createHistory from 'history/createMemoryHistory'
-  // import { Provider } from 'react-redux'
-  // import { ConnectedRouter } from 'react-router-redux'
-  //
-  //
-  // $resolve = ${JSON.stringify(resolveConfig, null, 2)}
-  //
-  // const { Routes, createStore } = require('resolve-scripts')
-  //
-  //
-  // const routes = require("${resolveConfig.routes}")
-  // const rootPath = "${resolveConfig.rootPath}"
-  //
-  // const initialState = {}
-  //
-  // const origin = "${host}:${resolveConfig.port}"
-  //
-  // const history = createHistory({
-  //     basename: rootPath
-  // })
-  //
-  // const store = createStore({
-  //   initialState,
-  //   history,
-  //   origin,
-  //   rootPath
-  // })
-  //
-  // RX.App.initialize(true, true)
-  // RX.UserInterface.setMainView(
-  //   <Provider store={store}>
-  //     <ConnectedRouter history={history}>
-  //         <Routes routes={routes} />
-  //     </ConnectedRouter>
-  //   </Provider>
-  // )
-  //         `.trim()
-  //     )
+  /*
+  const alias = getWebpackAlias()
+  
+  const isClient = true
+  
+  for(const target of ['ios', 'android']) {
+    console.log(path.resolve(__dirname, "dist/expo"))
+    
+    webpackConfigs.push({
+      name: target,
+      entry: [
+        '@babel/runtime/regenerator',
+        path.resolve(__dirname, "client/index.js")
+      ],
+      mode: deployOptions.mode,
+      devtool: "source-map",
+      target: "node",
+      node: {
+        __dirname: true,
+        __filename: true
+      },
+      resolve: {
+        modules: getModulesDirs(),
+        extensions: [`.${target}.js`, ".js"],
+        alias
+      },
+      output: {
+        path: path.resolve(__dirname, "dist/expo"),
+        filename: `main.${target}.js`,
+        devtoolModuleFilenameTemplate: "[absolute-resource-path]",
+        devtoolFallbackModuleFilenameTemplate: "[absolute-resource-path]?[hash]"
+      },
+      module: {
+        rules: [
+          {
+            test: /\$resolve.\w+\.js/,
+            use: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true,
+                  babelrc: false,
+                  presets: [
+                    '@babel/preset-env',
+                    [
+                      '@babel/preset-stage-0',
+                      {
+                        decoratorsLegacy: true,
+                        pipelineProposal: 'minimal'
+                      }
+                    ],
+                    '@babel/preset-react'
+                  ],
+                  plugins: ['@babel/plugin-transform-runtime']
+                }
+              },
+              {
+                loader: 'val-loader',
+                options: {
+                  resolveConfig,
+                  deployOptions,
+                  isClient
+                }
+              }
+            ]
+          },
+          {
+            test: /\.js$/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+                babelrc: false,
+                presets: [
+                  "babel-preset-react-native"
+                ]
+              }
+            },
+            exclude: [
+              /node_modules/,
+              ...getModulesDirs(),
+              path.resolve(__dirname, './dist')
+            ]
+          }
+        ]
+      },
+      plugins: [
+        getWebpackEnvPlugin({ resolveConfig, deployOptions, env, isClient }),
+        new webpack.DefinePlugin({
+          "crossplatform.origin": JSON.stringify(
+            `http://${host}:${resolveConfig.port}`
+          ),
+        })
+      ],
+      externals: getModulesDirs().map(modulesDir =>
+        nodeExternals({ modulesDir })
+      )
+    });
+  }
+  */
 };

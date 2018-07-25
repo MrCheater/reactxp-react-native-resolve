@@ -1,33 +1,52 @@
 import React from 'react'
 import RX from 'reactxp'
-import createHistory from 'history/createBrowserHistory'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
-import { Routes, createStore, deserializeInitialState } from 'resolve-scripts'
+import { AppContainer, createStore } from 'resolve-redux'
 
-const routes = require($resolve.routes)
-const rootPath = $resolve.rootPath
+import createHistory from './crossplatform/history'
 
-const initialState = deserializeInitialState(window.__INITIAL_STATE__)
+import routes from '$resolve.routes'
+import rootPath from '$resolve.rootPath'
+import staticPath from '$resolve.staticPath'
+import aggregateActions from '$resolve.aggregateActions'
+import viewModels from '$resolve.viewModels'
+import readModels from '$resolve.readModels'
+import aggregates from '$resolve.aggregates'
+import subscribeAdapter from '$resolve.subscribeAdapter'
+import redux from '$resolve.redux'
 
-const origin = window.location.origin
+const origin = $crossplatform.origin
+
+const initialState = {}
 
 const history = createHistory({
   basename: rootPath
 })
 
+const isClient = true
+
 const store = createStore({
+  redux,
+  viewModels,
+  readModels,
+  aggregates,
+  subscribeAdapter,
   initialState,
   history,
   origin,
-  rootPath
+  rootPath,
+  isClient
 })
 
 RX.App.initialize(true, true)
 RX.UserInterface.setMainView(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Routes routes={routes} />
-    </ConnectedRouter>
-  </Provider>
+  <AppContainer
+    origin={origin}
+    rootPath={rootPath}
+    staticPath={staticPath}
+    aggregateActions={aggregateActions}
+    store={store}
+    history={history}
+    routes={routes}
+  />
 )
+
