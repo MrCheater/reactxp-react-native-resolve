@@ -1,14 +1,13 @@
 {
   "presets": [
-    "babel-preset-expo"
+    "@babel/preset-env",
+    ["@babel/preset-stage-0", {
+      "decoratorsLegacy": true,
+      "pipelineProposal": "minimal"
+    }],
+    "@babel/preset-react"
   ],
   "plugins": [
-    "add-module-exports",
-    "transform-export-default"
-  ],
-  "env": {
-    "development": {
-      "plugins": ["transform-react-jsx-source"]
-    }
-  }
+    "@babel/plugin-transform-runtime"
+  ]
 }

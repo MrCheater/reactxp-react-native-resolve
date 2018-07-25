@@ -1,13 +1,15 @@
 import fs from "fs";
 import path from "path";
 import webpack from "webpack";
+/*
 import nodeExternals from "webpack-node-externals";
 
 import getModulesDirs from "resolve-scripts/dist/core/get_modules_dirs";
 import getWebpackEnvPlugin from "resolve-scripts/dist/core/get_webpack_env_plugin";
-import getWebpackResolveAliasPlugin from "resolve-scripts/dist/core/get_webpack_resolve_alias_plugin";
+import getWebpackAlias from "resolve-scripts/dist/core/get_webpack_alias";
 
 const host = process.argv[3] || require("my-local-ip")();
+*/
 
 try {
   fs.mkdirSync("dist");
@@ -30,30 +32,27 @@ export default main
 export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
   const [webpackClientConfig] = webpackConfigs
 
-  if(!webpackClientConfig.resolve.alias) {
-    webpackClientConfig.resolve.alias = {}
-  }
 
-  Object.assign(
-    webpackClientConfig.resolve.alias,
-    {
-      '$resolve.routes': resolveConfig.routes,
-      '$resolve.crossplatform.history': 'history/createBrowserHistory',
-    }
-  )
 
   webpackClientConfig.plugins.push(
     new webpack.DefinePlugin({
-      "$resolve.crossplatform.origin":
+      "$crossplatform.origin":
         "window.location.origin",
     })
   );
 
+  /*
+  const alias = getWebpackAlias()
+  
+  const isClient = true
+  
   for(const target of ['ios', 'android']) {
+    console.log(path.resolve(__dirname, "dist/expo"))
+    
     webpackConfigs.push({
       name: target,
       entry: [
-        "babel-regenerator-runtime",
+        '@babel/runtime/regenerator',
         path.resolve(__dirname, "client/index.js")
       ],
       mode: deployOptions.mode,
@@ -65,11 +64,8 @@ export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
       },
       resolve: {
         modules: getModulesDirs(),
-        alias: {
-          '$resolve.routes': resolveConfig.routes,
-          '$resolve.crossplatform.history': 'history/createMemoryHistory',
-        },
-        extensions: [`.${target}.js`, ".native.js", ".js"]
+        extensions: [`.${target}.js`, ".js"],
+        alias
       },
       output: {
         path: path.resolve(__dirname, "dist/expo"),
@@ -80,28 +76,69 @@ export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
       module: {
         rules: [
           {
-            test: /\.js$/,
-            loaders: [
+            test: /\$resolve.\w+\.js/,
+            use: [
               {
-                loader: "babel-loader?cacheDirectory=true"
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true,
+                  babelrc: false,
+                  presets: [
+                    '@babel/preset-env',
+                    [
+                      '@babel/preset-stage-0',
+                      {
+                        decoratorsLegacy: true,
+                        pipelineProposal: 'minimal'
+                      }
+                    ],
+                    '@babel/preset-react'
+                  ],
+                  plugins: ['@babel/plugin-transform-runtime']
+                }
+              },
+              {
+                loader: 'val-loader',
+                options: {
+                  resolveConfig,
+                  deployOptions,
+                  isClient
+                }
               }
-            ],
-            exclude: [...getModulesDirs(), path.resolve(__dirname, "dist")]
+            ]
+          },
+          {
+            test: /\.js$/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+                babelrc: false,
+                presets: [
+                  "babel-preset-react-native"
+                ]
+              }
+            },
+            exclude: [
+              /node_modules/,
+              ...getModulesDirs(),
+              path.resolve(__dirname, './dist')
+            ]
           }
         ]
       },
       plugins: [
-        getWebpackEnvPlugin({ resolveConfig, deployOptions, env }),
-        getWebpackResolveAliasPlugin({ resolveConfig, deployOptions, env }),
+        getWebpackEnvPlugin({ resolveConfig, deployOptions, env, isClient }),
         new webpack.DefinePlugin({
-          "$resolve.crossplatform.origin": JSON.stringify(
+          "crossplatform.origin": JSON.stringify(
             `http://${host}:${resolveConfig.port}`
           ),
         })
       ],
       externals: getModulesDirs().map(modulesDir =>
-        nodeExternals({ modulesDir, whitelist: "resolve-scripts" })
+        nodeExternals({ modulesDir })
       )
     });
   }
+  */
 };
