@@ -13,5 +13,13 @@
             "name": "Todos",
             "projection": "common/view-models/todos.projection.js"
         }
-    ]
+    ],
+    "env": {
+        "test": {
+            "storageAdapter": {
+                "module": "resolve-storage-lite",
+                "options": {}
+            }
+        }
+    }
 }
