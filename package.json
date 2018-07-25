@@ -16,7 +16,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
-    "react-native": "0.55.4",
+    "react-native": "0.56.0",
     "react-redux": "^5.0.6",
     "react-router-redux": "^5.0.0-alpha.9",
     "reactxp": "0.51.0",
@@ -29,7 +29,7 @@
     "history": "^4.7.2"
   },
   "devDependencies": {
-    "babel-preset-react-native": "^4.0.0",
+    "babel-preset-react-native": "^5.0.2",
     "@babel/core": "7.0.0-beta.54",
     "@babel/preset-env": "7.0.0-beta.54",
     "@babel/preset-react": "7.0.0-beta.54",

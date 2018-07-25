@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import webpack from "webpack";
-/*
+
 import nodeExternals from "webpack-node-externals";
 
 import getModulesDirs from "resolve-scripts/dist/core/get_modules_dirs";
@@ -9,12 +9,10 @@ import getWebpackEnvPlugin from "resolve-scripts/dist/core/get_webpack_env_plugi
 import getWebpackAlias from "resolve-scripts/dist/core/get_webpack_alias";
 
 const host = process.argv[3] || require("my-local-ip")();
-*/
 
 try {
   fs.mkdirSync("dist");
 } catch (e) {}
-
 
 try {
   fs.mkdirSync("dist/expo");
@@ -32,8 +30,6 @@ export default main
 export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
   const [webpackClientConfig] = webpackConfigs
 
-
-
   webpackClientConfig.plugins.push(
     new webpack.DefinePlugin({
       "$crossplatform.origin":
@@ -41,14 +37,11 @@ export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
     })
   );
 
-  /*
   const alias = getWebpackAlias()
   
   const isClient = true
   
   for(const target of ['ios', 'android']) {
-    console.log(path.resolve(__dirname, "dist/expo"))
-    
     webpackConfigs.push({
       name: target,
       entry: [
@@ -111,13 +104,6 @@ export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
             test: /\.js$/,
             use: {
               loader: 'babel-loader',
-              options: {
-                cacheDirectory: true,
-                babelrc: false,
-                presets: [
-                  "babel-preset-react-native"
-                ]
-              }
             },
             exclude: [
               /node_modules/,
@@ -140,5 +126,4 @@ export default (webpackConfigs, { resolveConfig, deployOptions, env }) => {
       )
     });
   }
-  */
 };

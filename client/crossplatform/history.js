@@ -1,1 +1,2 @@
-export default from 'history/createBrowserHistory'
+import history from 'history/createBrowserHistory'
+export default history

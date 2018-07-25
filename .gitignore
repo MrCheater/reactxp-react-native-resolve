@@ -70,3 +70,6 @@ dist
 
 event-storage.db
 package-lock.json
+
+android
+ios
